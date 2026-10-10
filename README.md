@@ -1,102 +1,77 @@
-# RAG-Based Text-to-SQL System
+RAG-Based Text-to-SQL System
 
-A Streamlit app that converts natural-language retail analytics questions into PostgreSQL queries using RAG-based schema retrieval and a Hugging Face LLM.
+An LLM-powered application that converts natural-language questions into SQL queries using Retrieval-Augmented Generation (RAG), allowing users to interact with relational databases without writing SQL manually.
 
-## Tech Stack
+🚀 Features
 
-- Python
-- Streamlit
-- PostgreSQL
-- Hugging Face `mistralai/Mistral-7B-Instruct-v0.3` 
-- `all-MiniLM-L6-v2` embeddings
-- FAISS vector search
+* Natural Language to SQL: Convert plain-English questions into SQL queries.
+* RAG Pipeline: Retrieve relevant database schemas and example queries.
+* Vector Search: Find relevant context using FAISS.
+* LLM Integration: Generate SQL using Mistral-7B-Instruct.
+* Query Execution: Execute SQL against PostgreSQL.
+* Results & Visualization: Present query results in tables and charts, where supported.
 
-## Features
+🛠️ Tech Stack
 
-- Natural language to SQL
-- RAG-based schema retrieval
-- SQL safety validation
-- PostgreSQL query execution
-- Result table
-- Automatic chart generation
-- Query explanation
-- Self-correction retry for failed SQL
-- Local fallback SQL templates when the Hugging Face call is unavailable
+* Language: Python
+* LLM: Mistral-7B-Instruct
+* Embeddings: all-MiniLM-L6-v2
+* Vector Search: FAISS
+* Database: PostgreSQL
+* Concepts: RAG, Embeddings, Text-to-SQL
 
-## Architecture
+🔄 Project Workflow
 
-```text
-Streamlit UI
-    -> Agent Controller
-        -> FAISS Schema Retriever
-        -> Hugging Face Mistral LLM
-        -> SQL Safety Validator
-        -> PostgreSQL Executor
-        -> Chart and Explanation Generator
-```
+                 USER QUESTION
+                       |
+                       v
+             Question Processing
+                       |
+                       v
+           Schema and Context Retrieval
+                       |
+                       v
+              Vector Search / RAG
+                       |
+                       v
+              LLM-Based SQL Generation
+                       |
+                       v
+                SQL Validation
+                       |
+                       v
+                Query Execution
+                       |
+                       v
+              Results and Explanation
+                       |
+                       v
+              Table / Chart Output
 
-## Project Flow
+Workflow Explanation
 
-```text
-1. User enters a natural-language query
-2. Relevant schema and SQL examples are retrieved using FAISS
-3. Mistral generates a PostgreSQL SELECT query
-4. SQL validator blocks unsafe or invalid operations
-5. Query runs on PostgreSQL
-6. Results are returned as a dataframe
-7. Chart and explanation are generated
-8. UI displays results, chart, SQL, and explanation
-```
+1. User Input
 
-## Setup
+The user enters a question in natural language, such as:
 
-Install dependencies:
+What are the total sales for each product category?
 
-```powershell
-pip install -r requirements.txt
-```
+2. Context Retrieval
 
-Create a `.env` file:
+The system retrieves relevant database schema details and, where available, example SQL queries that can help the model understand the database structure.
 
-```env
-HF_API_TOKEN=your_huggingface_token_here
-HF_MODEL=mistralai/Mistral-7B-Instruct-v0.3
-DATABASE_URL=postgresql+psycopg2://postgres:your_password@localhost:5432/retail_db
-```
+3. Context Augmentation
 
-Create a PostgreSQL database named `retail_db`, then load the dataset:
+The retrieved information is incorporated into the model’s prompt to ground SQL generation in the available database context.
 
-```powershell
-python -m scripts.load_postgres
-```
+4. SQL Generation
 
-## Run
+The LLM generates an SQL query based on the user’s question and the retrieved context.
 
-```powershell
-python -m streamlit run app.py
-```
+5. Validation and Execution
 
-Open the local Streamlit URL shown in the terminal.
+The generated query can be checked for validity and safety before being executed against the configured database.
 
-## Project Structure
+6. Result Presentation
 
-```text
-app.py                 Streamlit UI
-src/agent.py           RAG SQL agent orchestration
-src/llm.py             Hugging Face call, SQL prompts and fallback SQL
-src/schema_rag.py      Schema docs and FAISS retrieval
-src/sql_guard.py       SQL safety validation
-src/data_loader.py     PostgreSQL setup and CSV loading
-src/visualization.py   Charts and result explanation
-src/ui.py              Shared Streamlit UI helpers
-scripts/load_postgres.py Dataset loading command
-```
-
-## Output
-
-For each user query, the app returns:
-
-- Generated SQL query
-- Result table
-- Chart
-- Explanation
+The application presents the query results in a structured format and can provide a natural-language explanation or visualization when those features are available.
