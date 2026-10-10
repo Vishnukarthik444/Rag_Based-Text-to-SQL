@@ -58,20 +58,20 @@ The user enters a question in natural language, such as:
 
 ### 2. Context Retrieval
 
-The system retrieves relevant database schema details and, where available, example SQL queries that can help the model understand the database structure.
+    The system retrieves relevant database schema details and, where available, example SQL queries that can help the model understand the database structure.
 
 ### 3. Context Augmentation
 
-The retrieved information is incorporated into the model’s prompt to ground SQL generation in the available database context.
+    The retrieved information is incorporated into the model’s prompt to ground SQL generation in the available database context.
 
 ### 4. SQL Generation
 
-The LLM generates an SQL query based on the user’s question and the retrieved context.
+    The LLM generates an SQL query based on the user’s question and the retrieved context.
 
 ### 5. Validation and Execution
 
-The generated query can be checked for validity and safety before being executed against the configured database.
+    The generated query can be checked for validity and safety before being executed against the configured database.
 
 ### 6. Result Presentation
 
-The application presents the query results in a structured format and can provide a natural-language explanation or visualization when those features are available.
+    The application presents the query results in a structured format and can provide a natural-language explanation or visualization when those features are available.
