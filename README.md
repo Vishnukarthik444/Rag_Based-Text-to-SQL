@@ -1,8 +1,8 @@
-RAG-Based Text-to-SQL System
+# RAG-Based Text-to-SQL System
 
 An LLM-powered application that converts natural-language questions into SQL queries using Retrieval-Augmented Generation (RAG), allowing users to interact with relational databases without writing SQL manually.
 
-🚀 Features
+## Features
 
 * Natural Language to SQL: Convert plain-English questions into SQL queries.
 * RAG Pipeline: Retrieve relevant database schemas and example queries.
@@ -11,7 +11,7 @@ An LLM-powered application that converts natural-language questions into SQL que
 * Query Execution: Execute SQL against PostgreSQL.
 * Results & Visualization: Present query results in tables and charts, where supported.
 
-🛠️ Tech Stack
+## Tech Stack
 
 * Language: Python
 * LLM: Mistral-7B-Instruct
@@ -20,7 +20,7 @@ An LLM-powered application that converts natural-language questions into SQL que
 * Database: PostgreSQL
 * Concepts: RAG, Embeddings, Text-to-SQL
 
-🔄 Project Workflow
+## Project Workflow
 
                  USER QUESTION
                        |
@@ -48,30 +48,30 @@ An LLM-powered application that converts natural-language questions into SQL que
                        v
               Table / Chart Output
 
-Workflow Explanation
+### Workflow Explanation
 
-1. User Input
+### 1. User Input
 
 The user enters a question in natural language, such as:
 
-What are the total sales for each product category?
+    What are the total sales for each product category?
 
-2. Context Retrieval
+### 2. Context Retrieval
 
 The system retrieves relevant database schema details and, where available, example SQL queries that can help the model understand the database structure.
 
-3. Context Augmentation
+### 3. Context Augmentation
 
 The retrieved information is incorporated into the model’s prompt to ground SQL generation in the available database context.
 
-4. SQL Generation
+### 4. SQL Generation
 
 The LLM generates an SQL query based on the user’s question and the retrieved context.
 
-5. Validation and Execution
+### 5. Validation and Execution
 
 The generated query can be checked for validity and safety before being executed against the configured database.
 
-6. Result Presentation
+### 6. Result Presentation
 
 The application presents the query results in a structured format and can provide a natural-language explanation or visualization when those features are available.
